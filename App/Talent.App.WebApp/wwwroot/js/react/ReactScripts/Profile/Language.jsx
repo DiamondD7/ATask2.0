@@ -102,15 +102,6 @@ this.closeEdit()*//*
         })
     }
 
-    /*deleteClick(items) {
-        this.setState({
-            id: items.id,
-            name: items.name,
-            level: items.level
-        }, this.delLanguage(this.state.id))
-        
-    }*/
-
     delLanguage(id) {
         var cookies = Cookies.get('talentAuthToken');
         $.ajax({
