@@ -244,7 +244,7 @@ this.closeEdit()*//*
                             <th>Level</th>
                             <th>
                                 <button type="button" className="ui right floated teal button" onClick={this.openEdit}>
-                                    <i className="plus icon"></i> Add User
+                                    <i className="plus icon"></i> Add Language
                                 </button>
                             </th>
                         </tr>
