@@ -58,6 +58,8 @@ export default class AccountProfile extends React.Component {
         this.saveProfile = this.saveProfile.bind(this);
         this.loadData = this.loadData.bind(this);
         this.init = this.init.bind(this);
+
+        this.delLanguages = this.delLanguages.bind(this);
     };
 
     init() {
@@ -191,6 +193,13 @@ export default class AccountProfile extends React.Component {
         })
     }
 
+    delLanguages(id, index) {
+
+        var newDeletedItems = this.state.profileData.languages.splice(index, 1);
+        this.saveProfile();
+        /*this.setState({ profileData: { languages: newDeletedItems } })*/
+    }
+
     render() {
         const profile = {
             firstName: this.state.profileData.firstName,
@@ -252,6 +261,7 @@ export default class AccountProfile extends React.Component {
                                         <Language
                                             details={this.state.profileData.languages}
                                             controlFunc={this.updateArrays}
+                                            deleteFunc={this.delLanguages}
                                         />
 
                                         <Skill

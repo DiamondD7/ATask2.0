@@ -91,6 +91,8 @@ namespace Talent.Services.Profile.Domain.Services
                 delLang.Language = model.Name;
                 delLang.LanguageLevel = model.Level;
                 delLang.IsDeleted = true;
+
+                /*DeleteLanguageFromView(model, delLang);*/
                 await _userLanguageRepository.Delete(delLang);
                 return true;
             }
@@ -235,9 +237,38 @@ namespace Talent.Services.Profile.Domain.Services
                                 IsDeleted = false
                             };
                         }
+
                         UpdateLanguageFromView(item, languages);
                         newLang.Add(languages);
+                        /*else
+                        {
+                            languages.IsDeleted = true;
+                            languages.Id = item.Id;
+                        }
+
+                        if (languages.IsDeleted == true)
+                        {
+                            DeleteLanguageFromView(item, languages);
+                            newLang.Remove(languages);
+                        }
+                        else
+                        {
+
+                            UpdateLanguageFromView(item, languages);
+                            newLang.Add(languages);
+                        }*/
                     }
+
+                    /*foreach(var items in model.Languages)
+                    {
+                        var languages = existingUser.Languages.FirstOrDefault(x => x.Id == items.Id);
+                        if(languages != null)
+                        {
+                            languages.IsDeleted = true;
+                        }
+                        UpdateLanguageFromView(items, languages);
+                        newLang.Remove(languages);
+                    }*/
 
                     var newSkill = new List<UserSkill>();
                     foreach (var item in model.Skills)
@@ -270,6 +301,7 @@ namespace Talent.Services.Profile.Domain.Services
                         UpdateExperienceFromView(item, exp);
                         newExp.Add(exp);
                     }
+
 
                     existingUser.Languages = newLang;
                     existingUser.Skills = newSkill;
@@ -604,6 +636,13 @@ namespace Talent.Services.Profile.Domain.Services
             original.Language = model.Name;
         }
 
+        protected void DeleteLanguageFromView(AddLanguageViewModel model, UserLanguage original)
+        {
+            original.Id = model.Id;
+            original.LanguageLevel = model.Level;
+            original.Language = model.Name;
+        }
+
         #endregion
 
         #region Build Views from Model
@@ -658,7 +697,7 @@ namespace Talent.Services.Profile.Domain.Services
             //Your code here;
             throw new NotImplementedException();
         }
-         
+
         public async Task<int> GetTotalTalentsForClient(string clientId, string recruiterId)
         {
             //Your code here;

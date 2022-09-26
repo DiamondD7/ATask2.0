@@ -102,7 +102,7 @@ this.closeEdit()*//*
         })
     }
 
-    delLanguage(id) {
+    delLanguage(id,ind) {
         var cookies = Cookies.get('talentAuthToken');
         $.ajax({
             url: `http://localhost:60290/profile/profile/deleteLanguage`,
@@ -114,7 +114,8 @@ this.closeEdit()*//*
             dataType: "json",
             data: JSON.stringify({ id }),
             success: function (res) {
-                this.props.controlFunc(res.data);
+                this.props.deleteFunc(res.data, ind);
+                console.log('Thisis the index', ind);
                 if (res.success == true) {
                     TalentUtil.notification.show("Profile updated sucessfully", "success", null, null)
                 } else {
@@ -259,7 +260,7 @@ this.closeEdit()*//*
                                 <td>{items.level === null ? "NULL" : items.level}</td>
                                 <td>
                                     <button type="button" className="circular ui icon button" onClick={() => this.openUpdate(items)}><i className="pencil alternate icon"></i></button>
-                                    <button type="button" className="circular ui icon button" onClick={() => this.delLanguage(items.id)}><i className="trash alternate icon"></i></button>
+                                    <button type="button" className="circular ui icon button" onClick={() => this.delLanguage(items.id, index)}><i className="trash alternate icon"></i></button>
                                 </td>
                             </tr>)}
                     </tbody>
