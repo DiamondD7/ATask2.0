@@ -40,6 +40,8 @@ namespace Talent.Services.Profile.Domain.Services
         {
             _userAppContext = userAppContext;
             _userLanguageRepository = userLanguageRepository;
+            _userSkillRepository = userSkillRepository;
+            _userExperienceRepository = userExperienceRepository;
             _userRepository = userRepository;
             _employerRepository = employerRepository;
             _jobRepository = jobRepository;
@@ -105,9 +107,10 @@ namespace Talent.Services.Profile.Domain.Services
             //Your code here;
             if (skill.Id == null)
             {
-                UserSkill addSkill = new UserSkill();
+                UserSkill addSkill = new UserSkill();              
                 addSkill.Skill = skill.Name;
                 addSkill.ExperienceLevel = skill.Level;
+                addSkill.UserId = skill.CurrentUserId;
 
                 _userSkillRepository.Add(addSkill);
                 return true;

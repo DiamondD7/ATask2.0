@@ -2,6 +2,7 @@
 import React from 'react';
 import Cookies from 'js-cookie';
 import FormItemWrapper from '../Form/FormItemWrapper.jsx';
+import { ChildSingleInput } from '../Form/SingleInput.jsx';
 
 
 export default class Experience extends React.Component {
@@ -28,6 +29,8 @@ export default class Experience extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.addExperience = this.addExperience.bind(this);
         this.updateExperience = this.updateExperience.bind(this);
+
+        this.deleteItems = this.deleteItems.bind(this);
     };
 
     closeEdit() {
@@ -161,7 +164,7 @@ export default class Experience extends React.Component {
                 <div className="fields">
                     <div className="twelve wide field">
                         <ChildSingleInput
-                            inputType="text"
+                            inputType="date"
                             label="Start Date"
                             name="start"
                             placeholder="DD/MM/YYYY"
@@ -173,7 +176,7 @@ export default class Experience extends React.Component {
                     </div>
                     <div className="twelve wide field">
                         <ChildSingleInput
-                            inputType="text"
+                            inputType="date"
                             label="End Date"
                             name="end"
                             placeholder="DD/MM/YYYY"
@@ -283,6 +286,10 @@ export default class Experience extends React.Component {
         )
     }
 
+    deleteItems(index) {
+        this.props.deleteFunc(index);
+    }
+
     render() {
         return (
             <FormItemWrapper
@@ -296,7 +303,6 @@ export default class Experience extends React.Component {
                 <table className="ui table">
                     <thead className="full-width">
                         <tr>
-                            <th>Id</th>
                             <th>Company</th>
                             <th>Position</th>
                             <th>Responsibilities</th>
@@ -312,17 +318,16 @@ export default class Experience extends React.Component {
 
                     <tbody>
 
-                        {this.props.details.map((exp, index) =>
+                        {this.props.details.map((exp, index) => 
                             <tr key={index}>
-                                <td>{exp.id}</td>
                                 <td>{exp.company === null ? "NULL" : exp.company}</td>
                                 <td>{exp.position === null ? "NULL" : exp.position}</td>
                                 <td>{exp.responsibilities === null ? "NULL" : exp.responsibilities}</td>
-                                <td>{exp.start === null ? "NULL" : exp.start}</td>
-                                <td>{exp.end === null ? "NULL" : exp.end}</td>
+                                <td>{exp.start}</td>
+                                <td>{exp.end}</td>
                                 <td>
                                     <button type="button" className="circular ui icon button" onClick={() => this.openUpdate(exp)}><i className="pencil alternate icon"></i></button>
-                                    <button type="button" className="circular ui icon button" onClick={this.delLanguage}><i className="trash alternate icon"></i></button>
+                                    <button type="button" className="circular ui icon button" onClick={() => this.deleteItems(index)}><i className="trash alternate icon"></i></button>
                                 </td>
                             </tr>)}
                     </tbody>

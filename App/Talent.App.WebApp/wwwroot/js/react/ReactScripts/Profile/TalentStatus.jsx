@@ -12,7 +12,7 @@ export default class TalentStatus extends React.Component {
             }
         this.state = {
             newContact: details
-        }
+        } 
 
         this.handleChange = this.handleChange.bind(this);
         this.saveContact = this.saveContact.bind(this);

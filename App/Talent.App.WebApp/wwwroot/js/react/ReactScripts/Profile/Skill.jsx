@@ -202,6 +202,9 @@ export default class Skill extends React.Component {
         )
     }
 
+    deleteItems(index) {
+        this.props.deleteFunc(index);
+    }
 
     render() {
         return (
@@ -216,7 +219,6 @@ export default class Skill extends React.Component {
                 <table className="ui table">
                     <thead className="full-width">
                         <tr>
-                            <th>Id</th>
                             <th>Skill</th>
                             <th>Level</th>
                             <th>
@@ -231,12 +233,11 @@ export default class Skill extends React.Component {
 
                         {this.props.details.map((skills, index) =>
                             <tr key={index}>
-                                <td>{skills.id}</td>
                                 <td>{skills.name === null ? "NULL" : skills.name}</td>
                                 <td>{skills.level === null ? "NULL" : skills.level}</td>
                                 <td>
                                     <button type="button" className="circular ui icon button" onClick={() => this.openUpdate(skills)}><i className="pencil alternate icon"></i></button>
-                                    <button type="button" className="circular ui icon button"><i className="trash alternate icon"></i></button>
+                                    <button type="button" className="circular ui icon button" onClick={() => this.deleteItems(index)}><i className="trash alternate icon"></i></button>
                                 </td>
                             </tr>)}
                     </tbody>

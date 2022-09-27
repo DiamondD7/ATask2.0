@@ -240,7 +240,6 @@ this.closeEdit()*//*
                 <table className="ui table">
                     <thead className="full-width">
                         <tr>
-                            <th>Id</th>
                             <th>Language</th>
                             <th>Level</th>
                             <th>
@@ -255,7 +254,6 @@ this.closeEdit()*//*
 
                         {this.props.details.map((items, index) =>
                             <tr key={index}>
-                                <td>{items.id}</td>
                                 <td>{items.name === null ? "NULL" : items.name}</td>
                                 <td>{items.level === null ? "NULL" : items.level}</td>
                                 <td>

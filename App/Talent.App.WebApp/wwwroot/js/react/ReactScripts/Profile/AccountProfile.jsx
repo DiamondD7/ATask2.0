@@ -30,7 +30,7 @@ export default class AccountProfile extends React.Component {
                 education: [],
                 languages: [],
                 skills: [],
-                experience: [],
+                experience: [{start:'',end:''}],
                 certifications: [],
                 visaStatus: '',
                 visaExpiryDate: '',
@@ -60,6 +60,8 @@ export default class AccountProfile extends React.Component {
         this.init = this.init.bind(this);
 
         this.delLanguages = this.delLanguages.bind(this);
+        this.delExperience = this.delExperience.bind(this);
+        this.delSkills = this.delSkills.bind(this);
     };
 
     init() {
@@ -200,6 +202,16 @@ export default class AccountProfile extends React.Component {
         /*this.setState({ profileData: { languages: newDeletedItems } })*/
     }
 
+    delExperience(index) {
+        var newDeletedItems = this.state.profileData.experience.splice(index, 1);
+        this.saveProfile();
+    }
+
+    delSkills(index) {
+        var newDeletedItems = this.state.profileData.skills.splice(index, 1);
+        this.saveProfile();
+    }
+
     render() {
         const profile = {
             firstName: this.state.profileData.firstName,
@@ -267,12 +279,14 @@ export default class AccountProfile extends React.Component {
                                         <Skill
                                             details={this.state.profileData.skills}
                                             controlFunc={this.updateSkillArrays}
+                                            deleteFunc={this.delSkills}
                                         />
 
 
                                         <Experience
                                             details={this.state.profileData.experience}
                                             controlFunc={this.updateExperienceArrays}
+                                            deleteFunc={this.delExperience}
                                         />
 
                                         <FormItemWrapper
