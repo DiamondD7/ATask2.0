@@ -14,7 +14,8 @@ export default class Language extends React.Component {
             level: "",
             id: "",
             currentUserId: "",
-            showUpdateSection: false
+            showUpdateSection: false,
+            indx: 0
         }
 
         this.renderEdit = this.renderEdit.bind(this);
@@ -41,8 +42,8 @@ export default class Language extends React.Component {
         this.setState({ showEditSection: true, name: this.props.details.name, level: this.props.details.level, id: this.props.details.id, currentUserId: this.props.details.currentUserId })
     }
 
-    openUpdate(items) {
-        this.setState({ showUpdateSection: true, name: items.name, level: items.level, id: items.id, currentUserId: items.currentUserId })
+    openUpdate(items,index) {
+        this.setState({indx:index, showUpdateSection: true, name: items.name, level: items.level, id: items.id, currentUserId: items.currentUserId })
     }
 
     closeUpdate() {
@@ -145,7 +146,7 @@ this.closeEdit()*//*
             data: JSON.stringify({ name: this.state.name, level: this.state.level, id: this.state.id }),
             success: function (res) {
                 if (res.success == true) {
-                    this.props.controlFunc(res.data)
+                    this.props.controlFunc(res.data, this.state.indx)
                     TalentUtil.notification.show("Profile updated sucessfully", "success", null, null)
                 } else {
                     console.log(res.state);
@@ -257,7 +258,7 @@ this.closeEdit()*//*
                                 <td>{items.name === null ? "NULL" : items.name}</td>
                                 <td>{items.level === null ? "NULL" : items.level}</td>
                                 <td>
-                                    <button type="button" className="circular ui icon button" onClick={() => this.openUpdate(items)}><i className="pencil alternate icon"></i></button>
+                                    <button type="button" className="circular ui icon button" onClick={() => this.openUpdate(items,index)}><i className="pencil alternate icon"></i></button>
                                     <button type="button" className="circular ui icon button" onClick={() => this.delLanguage(items.id, index)}><i className="trash alternate icon"></i></button>
                                 </td>
                             </tr>)}

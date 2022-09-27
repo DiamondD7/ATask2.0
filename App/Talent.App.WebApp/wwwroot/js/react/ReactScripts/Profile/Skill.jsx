@@ -12,7 +12,8 @@ export default class Skill extends React.Component {
             name: "",
             level: "",
             id: "",
-            showUpdateSection: false
+            showUpdateSection: false,
+            indx: 0
         }
 
 
@@ -36,8 +37,8 @@ export default class Skill extends React.Component {
         this.setState({ showEditSection: true, name: this.props.details.name, level: this.props.details.level, id: this.props.details.id })
     }
 
-    openUpdate(items) {
-        this.setState({ showUpdateSection: true, name: items.name, level: items.level, id: items.id })
+    openUpdate(items,index) {
+        this.setState({indx: index,showUpdateSection: true, name: items.name, level: items.level, id: items.id })
     }
 
     closeUpdate() {
@@ -95,7 +96,7 @@ export default class Skill extends React.Component {
             data: JSON.stringify({ name: this.state.name, level: this.state.level, id: this.state.id }),
             success: function (res) {
                 if (res.success == true) {
-                    this.props.controlFunc(res.data)
+                    this.props.controlFunc(res.data,this.state.indx)
                     TalentUtil.notification.show("Profile updated sucessfully", "success", null, null)
                 } else {
                     console.log(res.state);
@@ -236,7 +237,7 @@ export default class Skill extends React.Component {
                                 <td>{skills.name === null ? "NULL" : skills.name}</td>
                                 <td>{skills.level === null ? "NULL" : skills.level}</td>
                                 <td>
-                                    <button type="button" className="circular ui icon button" onClick={() => this.openUpdate(skills)}><i className="pencil alternate icon"></i></button>
+                                    <button type="button" className="circular ui icon button" onClick={() => this.openUpdate(skills,index)}><i className="pencil alternate icon"></i></button>
                                     <button type="button" className="circular ui icon button" onClick={() => this.deleteItems(index)}><i className="trash alternate icon"></i></button>
                                 </td>
                             </tr>)}

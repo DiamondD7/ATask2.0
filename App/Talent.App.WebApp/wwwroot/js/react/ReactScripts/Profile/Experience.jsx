@@ -17,7 +17,8 @@ export default class Experience extends React.Component {
             responsibilities: "",
             start: "",
             end: "",
-            showUpdateSection: false
+            showUpdateSection: false,
+            indx: 0
         }
 
         this.renderUpdate = this.renderUpdate.bind(this);
@@ -41,8 +42,8 @@ export default class Experience extends React.Component {
         this.setState({ showEditSection: true, company: this.props.details.company, position: this.props.details.position, id: this.props.details.id, responsibilities: this.props.details.responsibilities, start: this.props.details.start, end: this.props.details.end })
     }
 
-    openUpdate(exp) {
-        this.setState({ showUpdateSection: true, company: exp.company, position: exp.position, id: exp.id, responsibilities: exp.responsibilities, start: exp.start, end: exp.end })
+    openUpdate(exp,index) {
+        this.setState({indx: index,showUpdateSection: true, company: exp.company, position: exp.position, id: exp.id, responsibilities: exp.responsibilities, start: exp.start, end: exp.end })
     }
 
     closeUpdate() {
@@ -108,7 +109,7 @@ export default class Experience extends React.Component {
             data: JSON.stringify({ company: this.state.company, position: this.state.position, id: this.state.id, responsibilities: this.state.responsibilities, start: this.state.start, end: this.state.end }),
             success: function (res) {
                 if (res.success == true) {
-                    this.props.controlFunc(res.data)
+                    this.props.controlFunc(res.data,this.state.indx)
                     TalentUtil.notification.show("Profile updated sucessfully", "success", null, null)
                 } else {
                     console.log(res.state);
@@ -243,7 +244,7 @@ export default class Experience extends React.Component {
                 <div className="fields">
                     <div className="twelve wide field">
                         <ChildSingleInput
-                            inputType="text"
+                            inputType="date"
                             label="Start Date"
                             name="start"
                             placeholder="DD/MM/YYYY"
@@ -255,7 +256,7 @@ export default class Experience extends React.Component {
                     </div>
                     <div className="twelve wide field">
                         <ChildSingleInput
-                            inputType="text"
+                            inputType="date"
                             label="End Date"
                             name="end"
                             placeholder="DD/MM/YYYY"
@@ -326,7 +327,7 @@ export default class Experience extends React.Component {
                                 <td>{exp.start}</td>
                                 <td>{exp.end}</td>
                                 <td>
-                                    <button type="button" className="circular ui icon button" onClick={() => this.openUpdate(exp)}><i className="pencil alternate icon"></i></button>
+                                    <button type="button" className="circular ui icon button" onClick={() => this.openUpdate(exp,index)}><i className="pencil alternate icon"></i></button>
                                     <button type="button" className="circular ui icon button" onClick={() => this.deleteItems(index)}><i className="trash alternate icon"></i></button>
                                 </td>
                             </tr>)}

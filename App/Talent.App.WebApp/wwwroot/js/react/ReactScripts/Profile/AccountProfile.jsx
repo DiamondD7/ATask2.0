@@ -108,13 +108,13 @@ export default class AccountProfile extends React.Component {
         })
     }
 
-    updateArrays(newValues) {
+    updateArrays(newValues,index) {
         console.log("this is the newvalues, ", newValues.id);
         if (newValues.id === null) {
             let newProfile = Object.assign(this.state.profileData.languages, [...this.state.profileData.languages, newValues])
         }
         else {
-            let updateProfile = Object.assign(this.state.profileData.languages, [...this.state.profileData.languages, newValues])
+            let updateProfile = this.state.profileData.languages.splice(index, 1, newValues);
         }
         this.saveProfile();
         /*this.setState({
@@ -122,22 +122,22 @@ export default class AccountProfile extends React.Component {
         }, this.saveProfile)*/
     }
 
-    updateSkillArrays(newValues) {
+    updateSkillArrays(newValues,index) {
         if (newValues.id === null) {
             let newProfile = Object.assign(this.state.profileData.skills, [...this.state.profileData.skills, newValues])
         }
         else {
-            let updateProfile = Object.assign(this.state.profileData.skills, [...this.state.profileData.skills, newValues])
+            let updateProfile = this.state.profileData.skills.splice(index, 1, newValues);
         }
         this.saveProfile();
     }
 
-    updateExperienceArrays(newValues) {
+    updateExperienceArrays(newValues,index) {
         if (newValues.id === null) {
             let newProfile = Object.assign(this.state.profileData.experience, [...this.state.profileData.experience, newValues])
         }
         else {
-            let updateProfile = Object.assign(this.state.profileData.experience, [...this.state.profileData.experience, newValues])
+            let updateProfile = this.state.profileData.experience.splice(index, 1, newValues);
         }
         this.saveProfile();
     }
