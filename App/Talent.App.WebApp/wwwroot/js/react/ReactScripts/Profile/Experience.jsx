@@ -109,7 +109,8 @@ export default class Experience extends React.Component {
             data: JSON.stringify({ company: this.state.company, position: this.state.position, id: this.state.id, responsibilities: this.state.responsibilities, start: this.state.start, end: this.state.end }),
             success: function (res) {
                 if (res.success == true) {
-                    this.props.controlFunc(res.data,this.state.indx)
+                    this.props.controlFunc(res.data, this.state.indx)
+                    this.closeUpdate();
                     TalentUtil.notification.show("Profile updated sucessfully", "success", null, null)
                 } else {
                     console.log(res.state);

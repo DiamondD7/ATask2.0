@@ -38,6 +38,7 @@ export default class PhotoUpload extends Component {
 
         let url = URL.createObjectURL(e.target.files[0]);
         data[e.target.name] = url
+        console.log("this is url", url);
         this.setState({
             newContact: data
         })
@@ -69,6 +70,8 @@ export default class PhotoUpload extends Component {
                         <button type="button" onClick={this.openUpload} style={{ border: 'none', backgroundColor: 'transparent' }}><img style={{ width: '200px', borderRadius: "50%" }} src={this.props.details} /></button>
 
                 }
+
+                
             </div>
         )
 

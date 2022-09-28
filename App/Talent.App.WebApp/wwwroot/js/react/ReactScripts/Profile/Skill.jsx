@@ -96,7 +96,8 @@ export default class Skill extends React.Component {
             data: JSON.stringify({ name: this.state.name, level: this.state.level, id: this.state.id }),
             success: function (res) {
                 if (res.success == true) {
-                    this.props.controlFunc(res.data,this.state.indx)
+                    this.props.controlFunc(res.data, this.state.indx)
+                    this.closeUpdate();
                     TalentUtil.notification.show("Profile updated sucessfully", "success", null, null)
                 } else {
                     console.log(res.state);

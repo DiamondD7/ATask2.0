@@ -147,6 +147,7 @@ this.closeEdit()*//*
             success: function (res) {
                 if (res.success == true) {
                     this.props.controlFunc(res.data, this.state.indx)
+                    this.closeUpdate();
                     TalentUtil.notification.show("Profile updated sucessfully", "success", null, null)
                 } else {
                     console.log(res.state);

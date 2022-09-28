@@ -219,6 +219,11 @@ export default class AccountProfile extends React.Component {
             email: this.state.profileData.email,
             phone: this.state.profileData.phone
         }
+
+        const talentDetails = {
+            summary: this.state.profileData.summary,
+            description: this.state.profileData.description
+        }
         return (
             <BodyWrapper reload={this.loadData} loaderData={this.state.loaderData}>
                 <section className="page-body">
@@ -238,7 +243,11 @@ export default class AccountProfile extends React.Component {
                                             />
                                         </FormItemWrapper>
 
-                                        <Description />
+                                        <Description
+                                            details={talentDetails}
+                                            controlFunc={this.updateForComponentId}
+                                            componentId="talentDetails"
+                                        />
 
                                         <FormItemWrapper
                                             title='User Details'
