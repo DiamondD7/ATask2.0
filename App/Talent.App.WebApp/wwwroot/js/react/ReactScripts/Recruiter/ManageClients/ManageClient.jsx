@@ -41,7 +41,7 @@ export default class ManageClient extends React.Component {
     // loadData url: 'http://localhost:60290/profile/profile/getClientList',
     //deleteClient  url: 'http://localhost:60998/authentication/authentication/deactivateClientAccount?id=' + clientId,
     
-
+    
     render() {
         
         return (
