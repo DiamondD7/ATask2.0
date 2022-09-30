@@ -32,7 +32,7 @@ export default class TalentFeed extends React.Component {
     init() {
         let loaderData = TalentUtil.deepCopy(this.state.loaderData)
         loaderData.isLoading = false;
-        this.setState({ loaderData });//comment this
+        this.setState({ loaderData }); //comment this
     }
 
     componentDidMount() {
@@ -45,7 +45,23 @@ export default class TalentFeed extends React.Component {
 
         return (
             <BodyWrapper reload={this.init} loaderData={this.state.loaderData}>
-                <div className="ui container">Your code goes here</div>
+                <div className="ui grid talent-feed container">
+                    <div className="four wide column">
+                        <CompanyProfile />
+                    </div>
+                    <div className="eight wide column">
+                        <TalentCard />
+                        <p id="load-more-loading">
+                            <img src="/images/rolling.gif" alt="Loading…" />
+                        </p>
+                    </div>
+                    
+                    <div className="four wide column">
+                        <div className="ui card">
+                            <FollowingSuggestion />
+                        </div>
+                    </div>
+                </div>
             </BodyWrapper>
         )
     }
