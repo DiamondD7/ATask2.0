@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactPlayer from 'react-player';
 import Cookies from 'js-cookie'
 import { BodyWrapper, loaderData } from '../Layout/BodyWrapper.jsx'
 import TalentCardDetail from '../TalentFeed/TalentCardDetail.jsx';
@@ -30,11 +31,15 @@ export default class TalentDetail extends React.Component {
                     status: "",
                     availableDate: ""
                 }
-            }
+            },
+            videoClick: false,
+            detailsClick: false
         }
 
         this.loadData = this.loadData.bind(this);
         this.updateWithoutSave = this.updateWithoutSave.bind(this);
+        this.openProfile = this.openProfile.bind(this);
+        this.openVideo = this.openVideo.bind(this);
     }
 
     componentDidMount() {
@@ -71,38 +76,68 @@ export default class TalentDetail extends React.Component {
         })
     }
 
+    openProfile() {
+        this.setState({ detailsClick: true })
+    }
+
+    openVideo() {
+        this.setState({ detailsClick: false })
+    }
+
     render() {
+
         return (
             <div>
-                <div className="ui link card container center aligned">
+                <div className="ui fluid card container center aligned">
                     <div className="content">
                         <p className="left floated"><strong>{this.state.profileData.firstName} {this.state.profileData.lastName}</strong></p>
                         <i className="star icon right floated"></i>
                     </div>
 
-                    <div className="image">
-                        <img src="http://semantic-ui.com/images/avatar2/large/matthew.png" />
-
-                    </div>
-                    <div className="content">
-                        <div className="description">
-                            <p><strong>Talent Snapshot</strong></p>
-                            <p>Current Employer</p>
-                            <p>ABC</p>
-                            <p>Visa Status</p>
-                            <p>{this.state.profileData.visaStatus}</p>
-                            <p>Position</p>
-
-                            <p>Software Developer</p>
-
+                    {this.state.detailsClick ?
+                        <div className="image">
+                            <img src="http://semantic-ui.com/images/avatar2/large/matthew.png" style={{ height: '300px', backgroundSize: 'cover' }} />
                         </div>
-                    </div>
+                        :
+
+                        <div className="content">
+                            <ReactPlayer
+                                url='https://www.youtube.com/watch?v=jYFk1O_t43A'
+                                width='520px'
+                            />
+                        </div>
+                    }
+
+                    {this.state.detailsClick ?
+                        <div className=" ui right floated content">
+                            <div className="description">
+                                <p>Current Employer</p>
+                                <p><strong>{this.state.profileData.experience[0].company}</strong></p>
+                                <p>Visa Status</p>
+                                <p><strong>{this.state.profileData.visaStatus}</strong></p>
+                                <p>Position</p>
+
+                                <p><strong>{this.state.profileData.experience[0].position}</strong></p>
+
+                            </div>
+                        </div>
+                        : ""}
+
+
+
+
 
                     <div className="extra content">
                         <div className="ui large basic buttons">
-                            <button type="button" className="ui icon button">
-                                <i className="video icon"></i>
-                            </button>
+                            {this.state.detailsClick === false ?
+                                <button type="button" className="ui icon button" onClick={this.openProfile}>
+                                    <i className="user icon"></i>
+                                </button>
+                                :
+                                <button type="button" className="ui icon button" onClick={this.openVideo}>
+                                    <i className="video icon"></i>
+                                </button>
+                            }
                             <button type="button" className="ui icon button">
                                 <i className="file pdf outline icon"></i>
                             </button>
@@ -115,9 +150,38 @@ export default class TalentDetail extends React.Component {
                         </div>
                     </div>
                     <div className="extra content">
+                        {this.state.profileData.skills.map((item, index) =>
+                            <div className="ui left floated" key={index}>
+                                <span>
+                                    <button className="ui disabled primary basic button">
+                                        {item.name}
+                                    </button>
+                                </span>
+                                <br />
+                                <div>
+                                    {item.level === 'Beginner' ?
+                                        <i className="star icon"></i> :
+                                        ""}
+                                    {item.level === 'Intermediate' ?
+                                        <div>
+                                            <i className="star icon"></i>
+                                            <i className="star icon"></i>
+                                        </div> : ""
+                                    }
+
+                                    {item.level === 'Expert' ?
+                                        <div>
+                                            <i className="star icon"></i>
+                                            <i className="star icon"></i>
+                                            <i className="star icon"></i>
+                                        </div> : ""
+                                    }
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
-                
+
             </div>
         )
     }

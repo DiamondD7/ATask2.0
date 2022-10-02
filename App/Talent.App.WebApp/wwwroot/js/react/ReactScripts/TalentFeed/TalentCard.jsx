@@ -17,7 +17,8 @@ export default class TalentCard extends React.Component {
                     <p><strong>There are no talents found for your recruitment company</strong></p>
                 </div>*/}
 
-                <TalentDetail/>
+                <TalentDetail />
+                
 
             </div>
         )
