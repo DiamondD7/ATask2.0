@@ -33,7 +33,8 @@ export default class TalentDetail extends React.Component {
                 }
             },
             videoClick: false,
-            detailsClick: false
+            detailsClick: false,
+            isLoading: true
         }
 
         this.loadData = this.loadData.bind(this);
@@ -65,6 +66,7 @@ export default class TalentDetail extends React.Component {
                 }
                 console.log(res.data);
                 this.updateWithoutSave(res.data)
+                this.setState({ isLoading: false })
             }.bind(this)
         })
     }
@@ -84,10 +86,15 @@ export default class TalentDetail extends React.Component {
         this.setState({ detailsClick: false })
     }
 
+
     render() {
 
         return (
             <div>
+                {this.state.isLoading === true ? 
+                    <div className="ui container center aligned">
+                        <p><strong>There are no talents found for your recruitment company</strong></p>
+                    </div> :
                 <div className="ui fluid card container center aligned">
                     <div className="content">
                         <p className="left floated"><strong>{this.state.profileData.firstName} {this.state.profileData.lastName}</strong></p>
@@ -181,6 +188,9 @@ export default class TalentDetail extends React.Component {
                         )}
                     </div>
                 </div>
+                    }
+
+
 
             </div>
         )
