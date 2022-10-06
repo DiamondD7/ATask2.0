@@ -484,7 +484,7 @@ export default class TalentDetail extends React.Component {
                         <div className="ui container center aligned">
                             <p><strong>There are no talents found for your recruitment company</strong></p>
                     </div> :
-                    <div style={{ overflowY: 'scroll', whiteSpace: 'nowrap', height:'500px' }}>
+                    <div style={{ overflowY: 'scroll', whiteSpace: 'nowrap', height:'500px' }}> 
                             {this.renderFirstData()}
                             {this.renderSecondData()}
                             {this.renderThirdData()}
