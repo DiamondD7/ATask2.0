@@ -99,7 +99,7 @@ export default class TalentDetail extends React.Component {
         for (let i = 0; i <= myIdArrays.length; i++) {
             currentUser = myIdArrays[i];
             $.ajax({
-                url: 'http://localhost:60290/profile/profile/' + currentUser,
+                url: 'https://advancewebapp.azurewebsites.net/profile/profile/profile/' + currentUser,
                 headers: {
                     'Authorization': 'Bearer ' + cookies,
                     'Content-Type': 'application/json'
